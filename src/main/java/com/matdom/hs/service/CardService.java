@@ -1,7 +1,7 @@
 package com.matdom.hs.service;
 
 import com.matdom.hs.domain.Card;
-import com.matdom.hs.exception.ResourceNotFoundException;
+import com.matdom.hs.exceptions.ResourceNotFoundException;
 import com.matdom.hs.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

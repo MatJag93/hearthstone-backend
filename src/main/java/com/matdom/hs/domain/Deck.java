@@ -1,42 +1,40 @@
 package com.matdom.hs.domain;
 
-import com.matdom.hs.enums.CardType;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.EnumType.STRING;
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Data
-@Table(name = "cards")
-public class Card {
+@Table(name = "decks")
+public class Deck {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(name = "card_name")
+    @Column(name = "deck_name")
     private String name;
 
     private String description;
 
-    private Integer strength;
+    @ManyToMany(cascade = ALL)
+    @JoinTable(
+            name = "decks_cards_relation",
+            joinColumns = {@JoinColumn(name = "deck_id")},
+            inverseJoinColumns = {@JoinColumn(name = "card_id")}
+    )
+    List<Card> cards = new ArrayList<>();
 
-    private Integer health;
-
-    @Column(name = "card_type")
-    @Enumerated(STRING)
-    private CardType cardType;
-
-    @ManyToMany(mappedBy = "cards")
-    private List<Deck> decks = new ArrayList<>();
 }

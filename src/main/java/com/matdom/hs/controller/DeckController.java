@@ -1,8 +1,8 @@
 package com.matdom.hs.controller;
 
-import com.matdom.hs.dtos.CardDTO;
-import com.matdom.hs.mapper.CardMapper;
-import com.matdom.hs.service.CardService;
+import com.matdom.hs.dtos.DeckDTO;
+import com.matdom.hs.mapper.DeckMapper;
+import com.matdom.hs.service.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cards")
-public class CardController {
+@RequestMapping("/decks")
+public class DeckController {
 
     @Autowired
-    private CardService cardService;
+    private DeckService deckService;
 
     @Autowired
-    private CardMapper cardMapper;
+    private DeckMapper deckMapper;
 
     @GetMapping
-    public List<CardDTO> getCards(){
-        return cardMapper.toCardListDTOs(cardService.getAllCards());
+    public List<DeckDTO> getDecks() {
+        return deckMapper.toDeckListDTOs(deckService.getAllDecks());
     }
 
     @GetMapping("/{id}")
-    public CardDTO getCard(@PathVariable Long id) {
-        return cardMapper.toCardDTO(cardService.getSingleCard(id));
+    public DeckDTO getDeck(@PathVariable Long id) {
+        return deckMapper.toDeckDTO(deckService.getSingleDeck(id));
     }
 
     @PostMapping
-    public CardDTO addCard(@RequestBody CardDTO cardDTO) {
-        return cardMapper.toCardDTO(cardService.saveCard(cardMapper.toCard(cardDTO)));
+    public DeckDTO addDeck(@RequestBody DeckDTO deckDTO) {
+        return deckMapper.toDeckDTO(deckService.saveDeck(deckMapper.toDeck(deckDTO)));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCard(@PathVariable Long id) {
-        cardService.deleteSingleCard(id);
+    public void deleteDeck(@PathVariable Long id) {
+        deckService.deleteSingleDeck(id);
     }
 }
