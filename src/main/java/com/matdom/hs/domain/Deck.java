@@ -1,5 +1,7 @@
 package com.matdom.hs.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -13,11 +15,14 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Builder
 @Data
+@AllArgsConstructor
 @Table(name = "decks")
 public class Deck {
     @Id
@@ -35,6 +40,10 @@ public class Deck {
             joinColumns = {@JoinColumn(name = "deck_id")},
             inverseJoinColumns = {@JoinColumn(name = "card_id")}
     )
+    @Builder.Default
     List<Card> cards = new ArrayList<>();
 
+    public Deck() {
+        cards = newArrayList();
+    }
 }

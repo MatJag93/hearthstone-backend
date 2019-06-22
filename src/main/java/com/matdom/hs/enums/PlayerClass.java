@@ -9,20 +9,26 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum CardType {
-    MINION("minion"),
-    SPELL("spell"),
-    WEAPON("weapon"),
-    HERO("hero");
+public enum PlayerClass {
+    NEUTRAL("neutral"),
+    PRIEST("priest"),
+    MAGE("mage"),
+    PALADIN("paladin"),
+    WARRIOR("warrior"),
+    ROGUE("rogue"),
+    DRUID("druid"),
+    SHAMAN("shaman"),
+    WARLOCK("warlock"),
+    HUNTER("hunter");
 
     @JsonValue
     private final String type;
 
     @JsonCreator
-    public static CardType fromType(@NonNull String type) {
+    public static PlayerClass fromType(@NonNull String type) {
         return Stream.of(values())
-                .find(cardType ->
-                        type.equalsIgnoreCase(cardType.getType()))
+                .find(playerClass ->
+                        type.equalsIgnoreCase(playerClass.getType()))
                 .getOrNull();
     }
 }

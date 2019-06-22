@@ -7,22 +7,24 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-@Getter
+
 @RequiredArgsConstructor
-public enum CardType {
-    MINION("minion"),
-    SPELL("spell"),
-    WEAPON("weapon"),
-    HERO("hero");
+@Getter
+public enum Rarity {
+    FREE("free"),
+    COMMON("common"),
+    RARE("rare"),
+    EPIC("epic"),
+    LEGENDARY("legendary");
 
     @JsonValue
     private final String type;
 
     @JsonCreator
-    public static CardType fromType(@NonNull String type) {
+    public static Rarity fromType(@NonNull String type) {
         return Stream.of(values())
-                .find(cardType ->
-                        type.equalsIgnoreCase(cardType.getType()))
+                .find(cardRarity ->
+                        type.equalsIgnoreCase(cardRarity.getType()))
                 .getOrNull();
     }
 }

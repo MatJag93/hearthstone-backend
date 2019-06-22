@@ -40,6 +40,8 @@
         <li>/decks/{id} - pokazuje konkretna talie ( GET )</li>
         <li>/decks/{id} - usuwa konkretna talie ( DELETE )</li>
 
+        <li>**********************************************</li>
+
         <li>/cards - pokazuje wszystkie karty ( GET )</li>
         <li>/cards - tworzy konkretna karte o zadanym body ( POST )</li>
         <li>/cards/{id} - pokazuje konkretna karte ( GET )</li>
